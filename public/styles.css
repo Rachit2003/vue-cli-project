@@ -22,7 +22,8 @@ h1{
     background-color: transparent;
     border: solid white ;
     border-width: thin;
-    margin-top: 10px;padding-bottom: 15px;
+    margin-top: 10px;
+    padding-bottom: 15px;
     font-size: large;
     color: white;
 }
@@ -68,6 +69,7 @@ ul{
     border: 1px black;
     color:white;
     height: 30px;
+    text-decoration: none;
 }
 h2{
     margin-bottom: 0;
@@ -79,7 +81,49 @@ h3{
     padding-left: 15px;
 }
 h4{
-    margin-top: 0px;
-    padding-left: 55px;
     color: red;
 }
+.btn-priority{
+    height: 30px;
+    background-color: rgb(139,0,139,0.8);
+    color:white;
+    /* padding-left: 30px; */
+
+
+
+}
+.int2{
+    height: 30px;
+    width:20% ;
+    border-radius: 5px;
+    margin-left:50px;
+    /* padding-left: 30px; */
+    margin-right: 20px;
+    background-color: transparent;
+    border: solid white ;
+    border-width: thin;
+    color: white;
+
+
+}
+.priority{
+    display: flex;
+    
+}
+.strikeout{
+    text-decoration: line-through;
+}
+.restore{
+  display: flex; 
+ display :flex-end;
+    
+}
+button:hover{
+    background-color: white;
+    color:black;
+    transition: 0.4s;
+}
+/* .deleted{
+    background-color: rgba(255,255,255,0.3)	;
+   
+} */
