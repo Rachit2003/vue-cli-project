@@ -1,6 +1,7 @@
 <template>
 
 <body>
+    
     <div  class="container">
         <h1>Todo List</h1>
         <h2>New ToDo</h2>
@@ -9,7 +10,7 @@
             <h4 v-if="isError" style="margin-top:0px;padding-left:55px;">Text field required</h4>
         </div>
         <div class="priority">
-            <h4 style="color:white;padding-top:11px;margin:0px;padding-left:60px;">Set Priority</h4>
+            <h3 style="color:white;padding-top:11px;margin:0px;padding-left:60px;">Set Priority:</h3>
             <input type="text"  class="int2" @keypress="validateNumber" v-model="priority" /> 
             <h4 v-if="isErrorNum" style="margin-top:10px;">*Please enter priority </h4> 
            
@@ -19,9 +20,9 @@
         <input type="submit" value="Add" @click="storeTodo" class="btn">
 
         <h3>To-Do List</h3>
-        <hr size="1" width="95%" color="white">
+        <hr size="2" width="95%" color="white">
         
-<div >
+    <div >
         <ul>
             <li v-for="(todo, index) in todos"  :key=index>
                 <div  :class="{'strikeout': todo.isStrikedoff ==true}">
@@ -33,8 +34,8 @@
             </li>
               
         </ul>
-          <h3 style="padding-top:80px;">Deleted To-Do Items</h3>
-          <hr size="1" width="95%" color="white">
+          <h3 style="padding-top:80px;padding-left:20px;">Deleted To-Do Items</h3>
+          <hr size="2" width="95%" color="white">
       
      
          <!-- <div class="deleted"> -->
@@ -49,7 +50,7 @@
              <button @click="restoreTodo(index),clearTodo(index)" class="edit">Restore</button> 
                <button @click="clearTodo(index)" class="edit">Delete</button> 
        
-  </div>
+             </div>
           </li>
           
        </ul>
@@ -132,7 +133,9 @@ export default {
                      this.todos.push(...this.removedTodos.splice(index, 1))
                       this.todos.sort( (a, b) => {return a.seq - b.seq } )
 
-                }
+                },
+                
+
                 
             }
 }
