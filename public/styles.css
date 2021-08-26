@@ -1,21 +1,33 @@
 .container{
-    height:700px;
+    height:100%;
     width:50%;
     background-color: rgb(0,0,0,0.86);
     margin:auto;
     border-radius: 8px;
     font-family: 'Hahmlet', serif;
-    color:white
+    color:white;
+    border: outset;
+    /* border-radius: 0% 0% 0% 0% / 0% 0% 0% 0% ; */
+    box-shadow: 20px 20px rgba(0,0,0,.15);
+    transition: all .4s ease;
+    position: relative;
+    border: double;
+}
+.container:hover{
+  
+        border-radius: 5% 5% 5% 5% / 5% 5% 5% 5% ;
+        box-shadow: 10px 10px rgba(0,0,0,.25);
+       
 }
 h1{
     text-align: center;
     padding-top: 30px;
     color:white;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 .int{
     margin-left: 53px;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
     width:84% ;
     height: 30px;
     border-radius: 5px;
@@ -26,21 +38,35 @@ h1{
     padding-bottom: 15px;
     font-size: large;
     color: white;
+    border-width: 2px;
+    font-size: 26px;
+    align-items: center;
+
 }
 
 .btn{
     height: 30px;
-    width: 85%;
-    margin-left: 50px;
+    width: 95%;
+    margin-left: 18px;
     border-radius: 5px;
     border:solid white;
     border-width: thin;
     background-color: rgb(139,0,139,0.8);
     color:white;
-    margin-left: 53px;
+    /* margin-left: 53px; */
     margin-bottom: 25px;
     margin-top: 30px;
+    border-width: 1.5px;
+  
 
+
+}
+.btn:hover{
+    background-color: white;
+    transition: 0.3s;
+    color:black;
+    cursor:pointer;
+   
 }
 li {
     height: 40px;   
@@ -70,7 +96,9 @@ ul{
     color:white;
     height: 30px;
     text-decoration: none;
+    cursor:pointer;
 }
+
 h2{
     margin-bottom: 0;
     padding-left: 55px;
@@ -88,6 +116,7 @@ h4{
     background-color: rgb(139,0,139,0.8);
     color:white;
     /* padding-left: 30px; */
+  
 
 
 
@@ -101,7 +130,7 @@ h4{
     margin-right: 20px;
     background-color: transparent;
     border: solid white ;
-    border-width: thin;
+    border-width: 2px;
     color: white;
 
 
@@ -126,4 +155,20 @@ button:hover{
 /* .deleted{
     background-color: rgba(255,255,255,0.3)	;
    
+} */
+body {background-color: #ddd; margin: 3rem;}
+
+/* #tv {
+  position: relative;
+  width: 350px;
+  height: 550px;
+  background: white;
+  border-radius: 0% 0% 0% 0% / 0% 0% 0% 0% ;
+  color: white;
+  box-shadow: 20px 20px rgba(0,0,0,.15);
+  transition: all .4s ease;
+} */
+/* #tv:hover {
+  border-radius: 0% 0% 50% 50% / 0% 0% 5% 5% ;
+  box-shadow: 10px 10px rgba(0,0,0,.25);
 } */
