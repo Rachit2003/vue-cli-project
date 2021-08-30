@@ -47,7 +47,7 @@
                           {{ todo.name }}
                        </div>  
             <div class="restore">  
-             <button @click="restoreTodo(index),clearTodo(index)" class="edit">Restore</button> 
+             <button @click="restoreTodo(index)" class="edit">Restore</button> 
                <button @click="clearTodo(index)" class="edit">Delete</button> 
        
              </div>
@@ -79,8 +79,37 @@ export default {
                 // removeTodo:'',
                 removedTodos:[]
               }
-            },            
+            },   
+          
+                  mounted() 
+                    {
+                        console.log('App mounted!');
+                        if (localStorage.getItem('todos')) this.todos = JSON.parse(localStorage.getItem('todos'));
+                        if (localStorage.getItem('removedTodos')) this.removedTodos = JSON.parse(localStorage.getItem('removedTodos'));
+                    },
+                    watch: 
+                    {
+                        todos: 
+                        {
+                        handler() 
+                        {
+                            console.log('Todos changed!');
+                            localStorage.setItem('todos', JSON.stringify(this.todos));
+                        },
+                        deep: true,
+                        },
+                        removedTodos: 
+                        {
+                        handler() 
+                        {
+                            console.log('Todos changed!');
+                            localStorage.setItem('removedTodos', JSON.stringify(this.removedTodos));
+                        },
+                        deep: true,
+                        },
+                    },
             methods: {
+               
                 validateNumber()
                 {
                 
@@ -106,7 +135,8 @@ export default {
                     this.isError=false
                     this.priority=''
                     this.todo=''
-                    
+                  
+
                     }
                     
                     else{
@@ -116,24 +146,23 @@ export default {
                 },
                 deleteTodo(index) {
                     this.removedTodos.push(...this.todos.splice(index, 1));
+                  
+
                 },
                 clearTodo(index){
                     this.removedTodos.splice(index,1)
-                },
-                // movetodo(){
-                //         // if(this.removeTodo==true){
-                //         this.value.push(
-                //     { name:this.todo ,   
-                //         seq:Number(this.priority), isStrikedoff:false}) 
-                //         }
-                //     // }
+                  
                 
-                //     }
+                },
+              
                 restoreTodo(index){
-                     this.todos.push(...this.removedTodos.splice(index, 1))
-                      this.todos.sort( (a, b) => {return a.seq - b.seq } )
+                    this.todos.push(...this.removedTodos.splice(index, 1))
+                    this.todos.sort( (a, b) => {return a.seq - b.seq } )
+                   
+
 
                 },
+              
                 
 
                 
