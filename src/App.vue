@@ -7,29 +7,43 @@
         <h2>New ToDo</h2>
         <div>
             <input type="text" v-model="todo" class="int" >
-            <h4 v-if="isError" style="margin-top:0px;padding-left:55px;">Text field required</h4>
+            <h4 v-if="isError" style="margin-top:0px;padding-left:25px;margin-bottom:0px;">*Text field required</h4>
         </div>
         <div class="priority">
-            <h3 style="color:white;padding-top:11px;margin:0px;padding-left:60px;">Set Priority:</h3>
-            <input type="text"  class="int2" @keypress="validateNumber" v-model="priority" /> 
-            <h4 v-if="isErrorNum" style="margin-top:10px;">*Please enter priority </h4> 
-           
-            <!-- <input type="submit" value="Add" @click="storepriority" class="btn-priority"> -->
-           
+            <input type="text" placeholder="Set Priority" class="int2" @keypress="validateNumber" v-model="priority" /> 
+                   
         </div>
-        <input type="submit" value="Add" @click="storeTodo" class="btn">
-
-        <h3>To-Do List</h3>
+           <h4 v-if="isErrorNum" style="margin-top:0px;padding-left:25px;margin-bottom:0px;">*Please enter priority </h4>
+            <input type="text" v-model="description" placeholder="Description" class="int3"> 
+            <input type="text" v-model="category " placeholder="Category" class="int3"> 
+            <input type="submit" value="Add" @click="trial1();storeTodo()" class="btn">
+    <div style="display:flex;justify-content:space-between;width:90%;height:55px">
+        <div style="width:120px;"> <h3 >To-Do List</h3></div>
+         <div style="margin-top:20px;">
+         <select class="form-control" v-model="selectedCategory">       
+         <option value="" selected disabled >Category</option>              
+         <option v-for="(todo,index) in todos"  :key="index" style="background-color:white;color:black;">{{ todo.catg }}</option>
+         </select>
+        
+        </div>
+        </div>
         <hr size="2" width="95%" color="white">
         
     <div >
         <ul>
             <li v-for="(todo, index) in todos"  :key=index>
-                <div  :class="{'strikeout': todo.isStrikedoff ==true}">
+                <div  v-for="todo in computed_items" :key=todo class="{'strikeout': todo.isStrikedoff ==true} ">
+                   
                 {{ todo.seq }} -
                 {{ todo.name }}
-                 </div>      
-             <button @click="deleteTodo(index)" class="edit">Remove</button> 
+                <br>
+               
+                <div class="descp">           
+                Description- {{todo.desc}}
+                </div>
+                </div>      
+                 
+                <button @click="deleteTodo(index)" class="edit">Remove</button> 
 
             </li>
               
@@ -38,26 +52,32 @@
           <hr size="2" width="95%" color="white">
       
      
-         <!-- <div class="deleted"> -->
+        
        <ul>
           
-          <li v-for="(todo, index) in removedTodos" :key="index" >
-                       <div class="strikeout">
+        <li v-for="(todo, index) in removedTodos" :key="index" >
+            <div class="strikeout">
                           {{ todo.seq }} -
                           {{ todo.name }}
-                       </div>  
+                           <br>
+                <div class="descp">           
+                 Description- {{todo.desc}}
+                </div>
+            </div>  
+                      
             <div class="restore">  
              <button @click="restoreTodo(index)" class="edit">Restore</button> 
-               <button @click="clearTodo(index)" class="edit">Delete</button> 
+             <button @click="clearTodo(index)" class="edit">Delete</button> 
        
-             </div>
-          </li>
+            </div>
+        </li>
           
        </ul>
      
          <!-- </div> -->
      
     </div>
+       
     </div>
 </body>
 </template>
@@ -71,43 +91,60 @@ export default {
               return {
                 todo: '',
                 todos: [],
+                description: '',
+                category:'',
                 selectedTodo: null,
                 priority: '',
                 priorities : [],
                 isError: false,
                 isErrorNum:false,
                 // removeTodo:'',
-                removedTodos:[]
+                removedTodos:[],
+                trial:[],
+                store:false,
+                selectedCategory:''
               }
             },   
-          
-                  mounted() 
+            computed: {
+            computed_items: function () {
+            let filterType= this.selectedCategory
+            return this.todos.filter(function(todo){
+              let filtered = true
+            if(filterType && filterType.length > 0){
+               filtered = todo.catg == filterType
+            }
+           
+        return filtered
+      })
+    }
+  
+             },
+            mounted() 
+                {
+                    console.log('App mounted!');
+                    if (localStorage.getItem('todos')) this.todos = JSON.parse(localStorage.getItem('todos'));
+                    if (localStorage.getItem('removedTodos')) this.removedTodos = JSON.parse(localStorage.getItem('removedTodos'));
+                },
+                 watch: 
+                {
+                todos: 
                     {
-                        console.log('App mounted!');
-                        if (localStorage.getItem('todos')) this.todos = JSON.parse(localStorage.getItem('todos'));
-                        if (localStorage.getItem('removedTodos')) this.removedTodos = JSON.parse(localStorage.getItem('removedTodos'));
+                    handler()                         {
+                    console.log('Todos changed!');
+                    localStorage.setItem('todos', JSON.stringify(this.todos));
                     },
-                    watch: 
+                     deep: true,
+                    },
+                    removedTodos: 
                     {
-                        todos: 
-                        {
-                        handler() 
-                        {
-                            console.log('Todos changed!');
-                            localStorage.setItem('todos', JSON.stringify(this.todos));
-                        },
-                        deep: true,
-                        },
-                        removedTodos: 
-                        {
-                        handler() 
-                        {
-                            console.log('Todos changed!');
-                            localStorage.setItem('removedTodos', JSON.stringify(this.removedTodos));
-                        },
-                        deep: true,
-                        },
+                    handler() 
+                    {
+                        console.log('Todos changed!');
+                        localStorage.setItem('removedTodos', JSON.stringify(this.removedTodos));
                     },
+                     deep: true,
+                     },
+                 },
             methods: {
                
                 validateNumber()
@@ -128,22 +165,22 @@ export default {
                     
                     if(this.todo!=""){
                     this.todos.push(
-                   { name:this.todo ,   
-                    seq:Number(this.priority), isStrikedoff:false})     
+                    { name:this.todo ,   
+                    seq:Number(this.priority),desc:this.description,catg:this.category, isStrikedoff:false})     
                     this.todos.sort( (a, b) => {return a.seq - b.seq } )
-         
-                    this.isError=false
+                    this.isError=false                 
                     this.priority=''
                     this.todo=''
-                  
-
-                    }
-                    
-                    else{
+                    this.description=''
+                    this.category=''                  
+                    }                   
+                    else
+                    {
                         this.isError=true
                     }
-                    
+                  
                 },
+               
                 deleteTodo(index) {
                     this.removedTodos.push(...this.todos.splice(index, 1));
                   
@@ -151,6 +188,7 @@ export default {
                 },
                 clearTodo(index){
                     this.removedTodos.splice(index,1)
+                    this.trial.splice(index,1)
                   
                 
                 },
@@ -162,6 +200,16 @@ export default {
 
 
                 },
+                trial1(){
+                    this.trial.push({cat:this.category})
+                  
+                },
+                display(){
+                    if(this.Option.todo.catg==this.todo.catg){
+                        console.log('Display called')
+                    }
+            
+                }
               
                 
 
