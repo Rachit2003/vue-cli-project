@@ -20,6 +20,7 @@
     <div style="display:flex;justify-content:space-between;width:90%;height:55px">
         <div style="width:120px;"> <h3 >To-Do List</h3></div>
          <div style="margin-top:20px;">
+
          <select class="form-control" v-model="selectedCategory">       
          <option value="" selected disabled >Category</option>              
          <option v-for="(todo,index) in todos"  :key="index" style="background-color:white;color:black;">{{ todo.catg }}</option>
@@ -31,8 +32,8 @@
         
     <div >
         <ul>
-            <li v-for="(todo, index) in todos"  :key=index>
-                <div  v-for="todo in computed_items" :key=todo class="{'strikeout': todo.isStrikedoff ==true} ">
+            <li v-for="(todo, index) in computed_items"  :key=index>
+                <div  class="{'strikeout': todo.isStrikedoff ==true} ">
                    
                 {{ todo.seq }} -
                 {{ todo.name }}
@@ -102,20 +103,26 @@ export default {
                 removedTodos:[],
                 trial:[],
                 store:false,
-                selectedCategory:''
+                selectedCategory: 0
               }
             },   
             computed: {
             computed_items: function () {
-            let filterType= this.selectedCategory
-            return this.todos.filter(function(todo){
-              let filtered = true
-            if(filterType && filterType.length > 0){
-               filtered = todo.catg == filterType
-            }
+                let filtertype = this.todos.filter((a)=>{
+                if(a.catg === this.selectedCategory){
+                    return a;
+                }
+                })
+                return filtertype;
+    //         let filterType= this.selectedCategory
+    //         return this.todos.filter(function(todo){
+    //           let filtered = true
+    //         if(filterType && filterType.length > 0){
+    //            filtered = todo.catg == filterType
+    //         }
            
-        return filtered
-      })
+    //     return filtered
+    //   })
     }
   
              },

@@ -12,6 +12,7 @@
     transition: all .4s ease;
     position: relative;
     border: double;
+    font-family: cursive;
 }
 .container:hover{
   
@@ -23,24 +24,25 @@ h1{
     text-align: center;
     padding-top: 30px;
     color:white;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
-.int{
-    margin-left: 53px;
-    margin-bottom: 15px;
-    width:84% ;
+.int,.int2,.int3{
+    margin-left: 13px;
+    /* margin-bottom: 10px; */
+    width:95% ;
     height: 30px;
     border-radius: 5px;
     background-color: transparent;
     border: solid white ;
     border-width: thin;
     margin-top: 10px;
-    padding-bottom: 15px;
+    padding-bottom: 8px;
     font-size: large;
     color: white;
     border-width: 2px;
     font-size: 26px;
     align-items: center;
+    /* text-align: center; */
 
 }
 
@@ -51,14 +53,24 @@ h1{
     border-radius: 5px;
     border:solid white;
     border-width: thin;
-    background-color: rgb(139,0,139,0.8);
+    /* background-color: rgb(139,0,139,0.8); */
     color:white;
     /* margin-left: 53px; */
     margin-bottom: 25px;
     margin-top: 30px;
     border-width: 1.5px;
-  
-
+   
+    background-position: 0% 0%, 100% 100%;
+    background-size: 200% 200%;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-width: 0.125rem 0.125rem 0.125rem 0.1875rem;
+    border-style: solid;
+    border-color: transparent;
+    font-weight: 500;
+    background-color:rgb(139,0,139,0.8)!important;
 
 }
 .btn:hover{
@@ -68,6 +80,7 @@ h1{
     cursor:pointer;
    
 }
+
 li {
     height: 40px;   
     font-size: 14;
@@ -101,7 +114,7 @@ ul{
 
 h2{
     margin-bottom: 0;
-    padding-left: 55px;
+    padding-left: 25px;
     padding-top: 10px;
 }
 h3{
@@ -121,20 +134,21 @@ h4{
 
 
 }
-.int2{
-    height: 30px;
+.int2, .int3{
+    /* height: 30px;
     width:20% ;
     border-radius: 5px;
-    margin-left:50px;
+    margin-left:50px; */
     /* padding-left: 30px; */
-    margin-right: 20px;
+    /* margin-right: 20px;
     background-color: transparent;
     border: solid white ;
     border-width: 2px;
-    color: white;
-
+    color: white; */
+    align-items: center;
 
 }
+
 .priority{
     display: flex;
     
@@ -158,6 +172,41 @@ button:hover{
 } */
 body {background-color: #ddd; margin: 3rem;}
 
+::placeholder {
+    align-items: center;
+    /* padding-top: 10px; */
+    opacity: 1; 
+    font-size: medium;
+    font-family: cursive;
+  }
+  .descp{
+      font-family: cursive;
+      color: rgba(225, 225, 225, 0.7);
+
+  }
+  button {
+    background-color: transparent;
+    border: none;
+}
+
+button, input, optgroup, select, textarea {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+.form-control{
+    /* margin-top: 10px; */
+    /* padding-top: 10px; */
+    align-items: center;
+    background-color: rgb(139,0,139,0.8);
+    border-radius: 5px;
+    color: white;
+    width: 100px;
+    
+}
+
+
 /* #tv {
   position: relative;
   width: 350px;
@@ -172,3 +221,4 @@ body {background-color: #ddd; margin: 3rem;}
   border-radius: 0% 0% 50% 50% / 0% 0% 5% 5% ;
   box-shadow: 10px 10px rgba(0,0,0,.25);
 } */
+
